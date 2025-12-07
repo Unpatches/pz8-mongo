@@ -51,24 +51,66 @@ pz8-mongo/
 
 ## Отчёт о проделанной работе
 ### Создание заметки POST
+```
+http://185.250.46.179:8080/api/v1/notes
+```
 
-<img width="480" height="501" alt="image" src="https://github.com/user-attachments/assets/5ad99c4d-032a-446c-adb8-acd653ce42eb" />
+<img width="457" height="539" alt="image" src="https://github.com/user-attachments/assets/25353247-4032-451e-ae02-5ac9fbe88225" />
+
 
 ### Получить все заметки GET
+```
+http://185.250.46.179:8080/api/v1/notes?limit=11&skip=0
+```
 
-<img width="757" height="686" alt="image" src="https://github.com/user-attachments/assets/223313b8-5bab-4c69-a500-849b0e6fc29c" />
+<img width="655" height="731" alt="image" src="https://github.com/user-attachments/assets/93cc406c-d7b1-418d-b41a-cd3076475953" />
+
 
 ### Получить все заметки по id GET
+```
+http://185.250.46.179:8080/api/v1/notes/6935e5e55ba8177ca66cc212
+```
 
-<img width="739" height="319" alt="image" src="https://github.com/user-attachments/assets/0cd07951-6af8-4665-8cbc-704cea1275e9" />
+<img width="531" height="376" alt="image" src="https://github.com/user-attachments/assets/52e9a33d-5ce4-4d86-b94e-0cf9e0a8b5ea" />
+
 
 ### Обновить заметку PATCH
+```
+http://185.250.46.179:8080/api/v1/notes/6935e5e55ba8177ca66cc212
+```
 
-<img width="494" height="467" alt="image" src="https://github.com/user-attachments/assets/4cf9482d-2b85-400a-95bd-618442ec5cc1" />
+<img width="538" height="445" alt="image" src="https://github.com/user-attachments/assets/dfd67d80-288a-49b6-a386-f76d989df9b4" />
+
 
 ### Удалить заметку DELETE
+```
+http://185.250.46.179:8080/api/v1/notes/6935e5e55ba8177ca66cc212
+```
 
-<img width="498" height="375" alt="image" src="https://github.com/user-attachments/assets/aedd1bc1-be95-4465-976d-a25dafd93fde" />
+<img width="536" height="343" alt="image" src="https://github.com/user-attachments/assets/d6f92021-0428-43e3-8884-75f390a79ccf" />
+
+
+### Текстовый поиск GET
+```
+http://185.250.46.179:8080/api/v1/notes?q=MongoDB&limit=5&skip=0
+```
+
+<img width="647" height="463" alt="image" src="https://github.com/user-attachments/assets/4220df16-a605-444a-9dea-c071e67e133d" />
+
+
+### Пагинация по курсору GET 
+```
+http://185.250.46.179:8080/api/v1/notes?limit=3
+```
+```
+http://185.250.46.179:8080/api/v1/notes?limit=3&after=6935f0b75ba8177ca66cc21a
+```
+
+
+<img width="639" height="711" alt="image" src="https://github.com/user-attachments/assets/a24a0b0e-d2f0-4d7b-8ce9-0f624345c678" />
+
+
+<img width="701" height="713" alt="image" src="https://github.com/user-attachments/assets/d268abbd-ae67-4cd6-8805-a02d9a2e8e71" />
 
 
 
