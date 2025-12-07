@@ -12,4 +12,5 @@ type Note struct {
 	Content   string             `bson:"content"       json:"content"`
 	CreatedAt time.Time          `bson:"createdAt"     json:"createdAt"`
 	UpdatedAt time.Time          `bson:"updatedAt"     json:"updatedAt"`
+	ExpiresAt *time.Time         `bson:"expiresAt,omitempty" json:"expiresAt,omitempty"`
 }

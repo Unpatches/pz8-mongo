@@ -19,6 +19,7 @@ func (h *Handler) Routes() chi.Router {
 	r := chi.NewRouter()
 	r.Get("/", h.list)
 	r.Post("/", h.create)
+	r.Get("/stats", h.stats)
 	r.Get("/{id}", h.get)
 	r.Patch("/{id}", h.patch)
 	r.Delete("/{id}", h.del)
@@ -73,22 +74,47 @@ func (h *Handler) get(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) list(w http.ResponseWriter, r *http.Request) {
 	q := r.URL.Query().Get("q")
 	limit, _ := strconv.ParseInt(r.URL.Query().Get("limit"), 10, 64)
-	skip, _ := strconv.ParseInt(r.URL.Query().Get("skip"), 10, 64)
 	if limit <= 0 || limit > 200 {
 		limit = 20
 	}
-	if skip < 0 {
-		skip = 0
-	}
+
+	after := r.URL.Query().Get("after")
 
 	c, cancel := reqCtx(r)
 	defer cancel()
-	items, err := h.repo.List(c, q, limit, skip)
+
+	var (
+		items []Note
+		err   error
+	)
+
+	if after != "" {
+		items, err = h.repo.ListAfter(c, q, after, limit)
+	} else {
+		skip, _ := strconv.ParseInt(r.URL.Query().Get("skip"), 10, 64)
+		if skip < 0 {
+			skip = 0
+		}
+		items, err = h.repo.List(c, q, limit, skip)
+	}
+
 	if err != nil {
 		writeJSON(w, 500, map[string]string{"error": err.Error()})
 		return
 	}
 	writeJSON(w, 200, items)
+}
+
+func (h *Handler) stats(w http.ResponseWriter, r *http.Request) {
+	c, cancel := reqCtx(r)
+	defer cancel()
+
+	s, err := h.repo.Stats(c)
+	if err != nil {
+		writeJSON(w, 500, map[string]string{"error": err.Error()})
+		return
+	}
+	writeJSON(w, 200, s)
 }
 
 func (h *Handler) patch(w http.ResponseWriter, r *http.Request) {
